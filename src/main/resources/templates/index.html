@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Todoリスト</title>
+	<style>
+		body{
+	        width: 500px;
+            margin: 0 auto;
+			background-color: bisque;
+		}
+		h1{
+			background-color:brown;
+			color: white;
+        }
+        .ex{
+            height: 80px; 
+           
+        }
+	</style>
+</head>
+<body> 
+	<h1 th:text="${now + ' Todoリスト'}"> Todoリスト</h1>
+
+	<form action="/todo/new">
+	<button>Todo登録</button>
+	</form>
+
+<table border="1"><br>
+  
+    <tr th:if="${! #lists.isEmpty(todos)}"><th>チェック</th><th>Todo</th><th>カテゴリ</th></tr>
+        <tr th:each="todo : ${todos}">
+            <td><input type="checkbox"></td>
+            <td><a th:text="${todo.name}" th:href="@{'/todo/'+${todo.id}+'/edittodo'}"></a></td>
+            <td th:text="${todo.style}"></td>
+        </tr>
+
+</table>
+</body>
+</html>

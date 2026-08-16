@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>登録フォーム</title>
+    <style>
+		body{
+	        width: 500px;
+            margin: 0 auto;
+			background-color: bisque;
+		}
+		h1{
+			background-color:brown;
+			color: white;
+        }
+        .ex{
+            height: 20px; 
+           
+        }
+    </style>
+</head>
+<body>
+    <h1>登録フォーム</h1>
+    <ul th:each="err:${errList}">
+            <li th:text="${err}" style="color: red;"></li>
+        </ul>
+    <form action ="/todo" method="post">
+        <table border="1">
+            <tr>
+                <th>カテゴリ</th>
+                <td>
+                    <select name="style">
+                    <option value="0">---</option>
+                    <option value="1">仕事</option>
+                    <option value="2">プライベート</option>
+                    <option value="3">その他</option>
+                </select></td>
+            </tr>
+            <tr class="ex">
+                <th>内容</th>
+                <td><textarea rows="6" cols="12" name="name" th:text="${name}"></textarea></td>
+            </tr>
+       
+    
+        </table><br>
+    
+    <button>登録</button>
+    </form>
+    <br>
+    <a href="/todo">一覧へ戻る</a>
+
+</body>
+</html>
