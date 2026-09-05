@@ -99,7 +99,6 @@ public class TodoController {
         updatetodo.setName(name);
         updatetodo.setStyle(style);
         todoRepository.save(updatetodo);
-
         return "redirect:/todo";
     }
 
