@@ -33,7 +33,7 @@ public class TodoController {
         httpSession.invalidate();
         LocalDateTime now = LocalDateTime.now();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String formattedDate = now.format(formatter);
 
         model.addAttribute("now", formattedDate);

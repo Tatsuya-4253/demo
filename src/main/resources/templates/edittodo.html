@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>todo編集</title>
+    <title>Todo詳細</title>
     <style>
         body {
             width: 500px;
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <h1>todo編集・削除</h1>
+    <h1>Todo詳細</h1>
     <form th:action="@{'/todo/' + ${todo.id}}" method="post">
         <table border="1">
             <tr>
@@ -47,7 +47,7 @@
 
         </table><br>
 
-        <button>編集</button>
+        <button>更新</button>
     </form>
 
     <form th:action="@{'/todo/' + ${todo.id} + '/delete'}" method="post" onsubmit="return confirm('このTodoを削除します。よろしいですか？')">

@@ -46,7 +46,7 @@ public class Todo {
         return createdAt;
     }
     public String getFormattedDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d");  
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
         return createdAt.format(formatter);
     }
     public boolean getCompleted(){
