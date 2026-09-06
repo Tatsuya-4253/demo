@@ -31,7 +31,7 @@ cd demo
 
 起動後、ブラウザで以下にアクセスしてください。
 
-http://localhost:8080
+http://localhost:8080/todo
 
 ## 工夫した点
 
