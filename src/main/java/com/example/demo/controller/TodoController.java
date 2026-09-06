@@ -23,7 +23,7 @@ public class TodoController {
     @Autowired
     TodoRepository todoRepository;
 
-    //Todo一覧画面表示
+    // Todo一覧画面表示
     @GetMapping("/todo")
     public String index(Model model) {
 
@@ -39,8 +39,8 @@ public class TodoController {
         return "index";
     }
 
-    //Todo新規登録画面
-    @PostMapping("/todo") 
+    // Todo新規登録画面
+    @PostMapping("/todo")
     public String createtodo(
             @RequestParam(name = "name", defaultValue = "") String name,
             @RequestParam("style") String style,
@@ -62,6 +62,8 @@ public class TodoController {
         }
 
         if (!errList.isEmpty()) {
+            model.addAttribute("name", name);
+            model.addAttribute("style", style);
             model.addAttribute("errList", errList);
             return "newtodo";
         }
@@ -70,12 +72,14 @@ public class TodoController {
 
         return "redirect:/todo";
     }
-    //Todo新規登録を一覧へ反映
+
+    // Todo新規登録を一覧へ反映
     @GetMapping("/todo/new")
     public String newtodo() {
         return "newtodo";
     }
-    //Todo編集・削除画面
+
+    // Todo編集・削除画面
     @GetMapping("/todo/{id}/edittodo")
     public String edittodo(
             @PathVariable Integer id,
@@ -85,26 +89,52 @@ public class TodoController {
         model.addAttribute("todo", findtodo);
         return "edittodo";
     }
-    //Todo編集を一覧へ反映
+
+    // Todo編集を一覧へ反映
     @PostMapping("/todo/{id}")
     public String updatetodo(
             @PathVariable Integer id,
-            @RequestParam String name,
-            @RequestParam String style) {
+            @RequestParam("name") String name,
+            @RequestParam("style") String style,
+            Model model) {
         Optional<Todo> todo = todoRepository.findById(id);
         Todo updatetodo = todo.get();
+
+        List<String> errList = new ArrayList<>();
+
+        if (name.trim().isEmpty() || name.equals("")) {
+            errList.add("Todoの内容は必須です");
+        } else if (name.length() < 3) {
+            errList.add("Todoの内容は3文字以上で入力してください");
+            model.addAttribute("name", name);
+        }
+        if (style.equals("0")) {
+            errList.add("カテゴリを選択してください");
+            model.addAttribute("name", name);
+
+        }
+
+        if (!errList.isEmpty()) {
+            updatetodo.setName(name);
+            updatetodo.setStyle(style);
+            model.addAttribute("todo", updatetodo);
+            model.addAttribute("errList", errList);
+            return "edittodo";
+        }
         updatetodo.setName(name);
         updatetodo.setStyle(style);
         todoRepository.save(updatetodo);
         return "redirect:/todo";
     }
-    //Todo編集・削除画面でTodoを削除
+
+    // Todo編集・削除画面でTodoを削除
     @PostMapping("/todo/{id}/delete")
     public String deletetodo(@PathVariable Integer id) {
         todoRepository.deleteById(id);
         return "redirect:/todo";
     }
-    //Todo一覧画面で完了済をグレーアウト
+
+    // Todo一覧画面で完了済をグレーアウト
     @PostMapping("/todo/{id}/complete")
     public String toggletodo(@PathVariable Integer id) {
         Optional<Todo> todo = todoRepository.findById(id);

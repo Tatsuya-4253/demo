@@ -18,18 +18,23 @@
 	<table class="table">
 
 		<tr th:if="${! #lists.isEmpty(todos)}">
-			<th>チェック</th>
-			<th>Todo</th>
-			<th>カテゴリ</th>
+			<th class="col-check">チェック</th>
+			<th class="col-name">Todo</th>
+			<th class="col-category">カテゴリ</th>
 		</tr>
-		<tr th:each="todo : ${todos}">
-			<td>
+		<tr th:each="todo : ${todos}" th:classappend="${todo.complete} ? 'complete' : ''">
+			<td class="td">
 				<form th:action="@{'/todo/' + ${todo.id} + '/complete'}" method="post">
 					<input type="checkbox" th:checked="${todo.complete}" onchange="this.form.submit()">
 				</form>
 			</td>
-			<td class="td" th:classappend="${todo.complete} ? 'complete' : ''"><a th:text="${todo.name}" th:href="@{'/todo/'+${todo.id}+'/edittodo'}"></a></td>
-			<td class="td" th:text="${todo.style}"></td>
+			<td class="td"><a th:text="${todo.name}" th:href="@{'/todo/'+${todo.id}+'/edittodo'}"></a></td>
+			<td class="td" th:switch="${todo.style}">
+				<span th:case="'1'">仕事</span>
+				<span th:case="'2'">プライベート</span>
+				<span th:case="'3'">その他</span>
+				<span th:case="*">未分類</span>
+			</td>
 		</tr>
 
 	</table>
