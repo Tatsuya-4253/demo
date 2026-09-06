@@ -30,7 +30,6 @@ public class TodoController {
     @GetMapping("/todo")
     public String index(Model model) {
 
-        httpSession.invalidate();
         LocalDateTime now = LocalDateTime.now();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");

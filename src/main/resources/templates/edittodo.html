@@ -4,32 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <title>Todo詳細</title>
-    <style>
-        body {
-            width: 500px;
-            margin: 0 auto;
-            background-color: bisque;
-        }
-
-        h1 {
-            background-color: brown;
-            color: white;
-        }
-
-        .ex {
-            height: 20px;
-
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
-    <h1>Todo詳細</h1>
+    <h1 class="title">Todo詳細</h1>
     <form th:action="@{'/todo/' + ${todo.id}}" method="post">
-        <table border="1">
+        <table class="table">
             <tr>
-                <th>カテゴリ</th>
-                <td>
+                <th class="th">カテゴリ</th>
+                <td class="td">
                     <select name="style">
                         <option value="0">---</option>
                         <option value="1" th:selected="${todo.style == '1'}">仕事</option>
@@ -40,22 +24,22 @@
             </tr>
 
             <tr class="ex">
-                <th>内容</th>
-                <td><textarea rows="6" cols="12" name="name" th:text="${todo.name}"></textarea></td>
+                <th class="th">内容</th>
+                <td class="td"><textarea rows="6" cols="12" name="name" th:text="${todo.name}"></textarea></td>
             </tr>
 
 
         </table><br>
 
-        <button>更新</button>
+        <button class="btn-base btn-edit">更新</button>
     </form>
 
     <form th:action="@{'/todo/' + ${todo.id} + '/delete'}" method="post" onsubmit="return confirm('このTodoを削除します。よろしいですか？')">
-        <button>削除</button>
+        <button class="btn-base btn-delete">削除</button>
     </form>
 
     <br>
-    <a href="/todo">一覧へ戻る</a>
+    <a href="/todo" class="btn-back">一覧へ戻る</a>
 
 </body>
 
