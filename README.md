@@ -26,7 +26,7 @@ Todoの登録・編集・削除に加え、完了状態の管理やカテゴリ�
 ```bash
 git clone https://github.com/Tatsuya-4253/demo.git
 cd demo
-./mvnw spring-boot:run
+mvnw spring-boot:run
 ```
 
 起動後、ブラウザで以下にアクセスしてください。
