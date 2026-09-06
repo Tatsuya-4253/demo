@@ -5,7 +5,7 @@ Todoの登録・編集・削除に加え、完了状態の管理やカテゴリ�
 
 ## 使用技術
 
-- Java SE17
+- Java SE21
 - Spring Boot 3.5.0
 - Thymeleaf
 - Spring Data JPA
