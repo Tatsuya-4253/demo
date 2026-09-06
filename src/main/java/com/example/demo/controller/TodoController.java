@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import jakarta.servlet.http.HttpSession;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,9 @@ import com.example.demo.repository.TodoRepository;
 public class TodoController {
 
     @Autowired
-    HttpSession httpSession;
-
-    @Autowired
     TodoRepository todoRepository;
 
+    //Todo一覧画面表示
     @GetMapping("/todo")
     public String index(Model model) {
 
@@ -42,7 +39,8 @@ public class TodoController {
         return "index";
     }
 
-    @PostMapping("/todo")
+    //Todo新規登録画面
+    @PostMapping("/todo") 
     public String createtodo(
             @RequestParam(name = "name", defaultValue = "") String name,
             @RequestParam("style") String style,
@@ -72,12 +70,12 @@ public class TodoController {
 
         return "redirect:/todo";
     }
-
+    //Todo新規登録を一覧へ反映
     @GetMapping("/todo/new")
     public String newtodo() {
         return "newtodo";
     }
-
+    //Todo編集・削除画面
     @GetMapping("/todo/{id}/edittodo")
     public String edittodo(
             @PathVariable Integer id,
@@ -87,7 +85,7 @@ public class TodoController {
         model.addAttribute("todo", findtodo);
         return "edittodo";
     }
-
+    //Todo編集を一覧へ反映
     @PostMapping("/todo/{id}")
     public String updatetodo(
             @PathVariable Integer id,
@@ -100,10 +98,19 @@ public class TodoController {
         todoRepository.save(updatetodo);
         return "redirect:/todo";
     }
-
+    //Todo編集・削除画面でTodoを削除
     @PostMapping("/todo/{id}/delete")
     public String deletetodo(@PathVariable Integer id) {
         todoRepository.deleteById(id);
+        return "redirect:/todo";
+    }
+    //Todo一覧画面で完了済をグレーアウト
+    @PostMapping("/todo/{id}/complete")
+    public String toggletodo(@PathVariable Integer id) {
+        Optional<Todo> todo = todoRepository.findById(id);
+        Todo compTodo = todo.get();
+        compTodo.setComplete(!compTodo.getComplete());
+        todoRepository.save(compTodo);
         return "redirect:/todo";
     }
 

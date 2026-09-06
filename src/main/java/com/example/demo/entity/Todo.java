@@ -16,7 +16,7 @@ public class Todo {
     private String name;
     private String style;
     private LocalDateTime createdAt;
-    private boolean completed;
+    private boolean complete;
 
     public Todo(){
 
@@ -49,11 +49,11 @@ public class Todo {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
         return createdAt.format(formatter);
     }
-    public boolean getCompleted(){
-        return completed;
+    public boolean getComplete(){
+        return complete;
     }
-    public void setCompleted(boolean completed){
-        this.completed = completed;
+    public void setComplete(boolean complete){
+        this.complete = complete;
     }
     
 }
