@@ -32,11 +32,11 @@ https://demo-r63q.onrender.com/todo
 
 ### ②ローカルで起動する
 
-\`\`\`bash
+```bash
 git clone https://github.com/Tatsuya-4253/demo.git
 cd demo
 ./mvnw spring-boot:run
-\`\`\`
+```
 
 起動後、ブラウザで以下にアクセスしてください。
 
