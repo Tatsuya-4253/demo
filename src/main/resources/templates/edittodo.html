@@ -12,6 +12,7 @@
     <ul th:each="err:${errList}">
         <li th:text="${err}" style="color: red;"></li>
     </ul>
+    <div class="btn-config">
     <form th:action="@{'/todo/' + ${todo.id}}" method="post">
         <table class="table">
             <tr>
@@ -41,6 +42,7 @@
         onsubmit="return confirm('このTodoを削除します。よろしいですか？')">
         <button class="btn-base btn-delete">削除</button>
     </form>
+    </div>
 
     <br>
     <a href="/todo" class="btn-back">一覧へ戻る</a>

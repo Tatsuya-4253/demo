@@ -71,3 +71,7 @@ body {
     text-decoration: none;
     display: inline-block;
 }
+.btn-config {
+    display: flex;
+    gap: 8px;
+}
