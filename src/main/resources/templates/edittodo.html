@@ -12,9 +12,10 @@
     <ul th:each="err:${errList}">
         <li th:text="${err}" style="color: red;"></li>
     </ul>
-    <div class="btn-config">
-    <form th:action="@{'/todo/' + ${todo.id}}" method="post">
+
+    <form id="editForm" th:action="@{'/todo/' + ${todo.id}}" method="post">
         <table class="table">
+
             <tr>
                 <th class="th">カテゴリ</th>
                 <td class="td">
@@ -32,17 +33,18 @@
                 <td class="td"><textarea rows="6" cols="12" name="name" th:text="${todo.name}"></textarea></td>
             </tr>
 
-
         </table><br>
-
-        <button class="btn-base btn-edit">更新</button>
     </form>
 
-    <form th:action="@{'/todo/' + ${todo.id} + '/delete'}" method="post"
+    <form id="deleteForm" th:action="@{'/todo/' + ${todo.id} + '/delete'}" method="post"
         onsubmit="return confirm('このTodoを削除します。よろしいですか？')">
-        <button class="btn-base btn-delete">削除</button>
     </form>
+    
+    <div class="button-config">
+        <button type="submit" form="editForm" class="btn-base btn-edit">更新</button>
+        <button type="submit" form="deleteForm" class="btn-base btn-delete">削除</button>
     </div>
+
 
     <br>
     <a href="/todo" class="btn-back">一覧へ戻る</a>
